@@ -29,7 +29,7 @@ def parms():
     parser.add_argument('--save_dir', type=str, default='tmp/',
                         help='Directory for detect result')
     parser.add_argument('--breath_modelpath', type=str,
-                        default='rbcar_mafa_best.pth', help='trained model')
+                        default='rbcar_mafa_best_xiaoyu.pth', help='trained model')
     parser.add_argument('--threshold', default=0.65, type=float,
                         help='Final confidence threshold')
     parser.add_argument('--use_cuda', default=False, type=bool,

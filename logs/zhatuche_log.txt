@@ -1,0 +1,1 @@
+[2020-07-01 21:21:22 extract_zhatuche_sample.py:52] INFO     /Users/yanyan/Desktop/ShangYu_videos/short video/1593490134184_b1c050e101c14be8a0e95953ef14ae25.mp4
