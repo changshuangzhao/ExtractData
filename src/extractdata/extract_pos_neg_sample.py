@@ -18,7 +18,7 @@ def parms():
     parser.add_argument('--save_dir', type=str, default='tmp/',
                         help='Directory for detect result')
     parser.add_argument('--breath_modelpath', type=str,
-                        default='../networks/rbcar_mafa_best_xiaoyu.pth', help='trained model')
+                        default='../networks/rbcar_mafa_best.pth', help='trained model')
     parser.add_argument('--threshold', default=0.65, type=float,
                         help='Final confidence threshold')
     parser.add_argument('--use_cuda', default=False, type=bool,
@@ -34,12 +34,16 @@ if __name__ == '__main__':
     args = parms()
     model = BreathMask(args)
 
-    log = setup_logger('../../logs/log.txt')
+    log = setup_logger('../../logs/zhatuche_log.txt')
 
-    root = '/media/changshuang/My Book/ShangYu_videos/short video'
-    path = '/media/changshuang/My Book/ShangYu_Extract_Save'
+    # root = '/media/changshuang/My Book/ShangYu_videos/short video'
+    # path = '/media/changshuang/My Book/ShangYu_Extract_Save'
+    # root = '/Users/yanyan/Desktop/ShangYu_videos/short video'
+    # path = '/Users/yanyan/Desktop/data'
+    root = '/Users/yanyan/Desktop/zhatuche_test_video'
+    path = '/Users/yanyan/Desktop/zhatuche_test_save'
 
-    video_anno = os.path.join(os.path.dirname(__file__), '../../video/ShangYu_short_video_path.txt')
+    video_anno = os.path.join(os.path.dirname(__file__), '../../video/zhatuche_test_video_path.txt')
     with open(video_anno, 'r') as f:
         video_annos = f.readlines()
         for video_index in range(len(video_annos)):
@@ -54,7 +58,7 @@ if __name__ == '__main__':
                 log.info("===================don't playing================")
             else:
                 total_frame = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-                print('-------------------total_frame------------------', total_frame)
+                print('-------------------total_frame {}------------------'.format(total_frame))
                 frame_index = 0
                 while frame_index < total_frame:
                     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_index)
@@ -62,7 +66,7 @@ if __name__ == '__main__':
                     if ret:
                         if frame_index % 100 == 0:
                             print('##############cur frame index value ({})##############'.format(frame_index))
-                        if frame_index % 1 == 0:
+                        if frame_index % 15 == 0:
                             data_dict = detection_by_image(frame)
                             datas = data_dict['data']
                             if datas:
@@ -78,20 +82,13 @@ if __name__ == '__main__':
 
                                     if pre_cls[0] == 1:
                                         save_path = os.path.join(path, 'video_pos' + str(video_index))
-                                        if not os.path.exists(save_path):
-                                            os.makedirs(save_path)
-
-                                        dec_img = cv2.resize(dec_img, (224, 224))
-                                        cv2.imwrite(save_path + '/v{}_f{}_b{}.jpg'.format(video_index, frame_index, box_index), dec_img)
-                                        # log.info('************save file [{:0>8}.jpg]************'.format(frame_index))
                                     else:
                                         save_path = os.path.join(path, 'video_neg' + str(video_index))
-                                        if not os.path.exists(save_path):
-                                            os.makedirs(save_path)
-
-                                        dec_img = cv2.resize(dec_img, (224, 224))
-                                        cv2.imwrite(save_path + '/v{}_f{}_b{}.jpg'.format(video_index, frame_index, box_index), dec_img)
-                                        # break
+                                    if not os.path.exists(save_path):
+                                        os.makedirs(save_path)
+                                    dec_img = cv2.resize(dec_img, (224, 224))
+                                    cv2.imwrite(save_path + '/v{}_f{}_b{}.jpg'.format(video_index, frame_index, box_index), dec_img)
+                                    log.info('************save file [v{}_f{}_b{}.jpg]************'.format(video_index, frame_index, box_index))
                         # cv2.imshow('frame', frame)
                         if cv2.waitKey(1) & 0xff == 27:
                             break
