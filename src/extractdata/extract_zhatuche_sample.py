@@ -38,10 +38,11 @@ if __name__ == '__main__':
 
     # root = '/media/changshuang/My Book/ShangYu_videos/short video'
     # path = '/media/changshuang/My Book/ShangYu_Extract_Save'
-    root = '/Users/yanyan/Desktop/ShangYu_videos/short video'
+    # 需修改路径
+    root = '/Users/yanyan/Desktop/ShangYu_videos/long video'
     path = '/Users/yanyan/Desktop/save'
+    video_anno = os.path.join(os.path.dirname(__file__), '../../video/ShangYu_long_video_path.txt')
 
-    video_anno = os.path.join(os.path.dirname(__file__), '../../video/ShangYu_short_video_path.txt')
     with open(video_anno, 'r') as f:
         video_annos = f.readlines()
         for video_index in range(len(video_annos)):
@@ -64,7 +65,7 @@ if __name__ == '__main__':
                     if ret:
                         if frame_index % 100 == 0:
                             print('##############cur frame index value ({})##############'.format(frame_index))
-                        if frame_index % 5 == 0:
+                        if frame_index % 100 == 0:
                             data_dict = detection_by_image(frame)
                             datas = data_dict['data']
                             if datas:
@@ -79,12 +80,12 @@ if __name__ == '__main__':
                                     # cv2.rectangle(frame, (l, t), (l + w, t + h), (0, 0, 255), 2)
 
                                     if pre_cls[0] == 1:
-                                        save_path = os.path.join(path, 'video' + str(video_index))
+                                        save_path = os.path.join(path, 'video_l' + str(video_index))
                                         if not os.path.exists(save_path):
                                             os.makedirs(save_path)
                                         # cv2.imshow('frmae', dec_img)
-                                        cv2.imwrite(save_path + '/v{}_f{}.jpg'.format(video_index, frame_index), frame)
-                                        log.info('************save file [v{}_f{}.jpg]************'.format(video_index, frame_index))
+                                        cv2.imwrite(save_path + '/vl{}_f{}.jpg'.format(video_index, frame_index), frame)
+                                        log.info('************save file [vl{}_f{}.jpg]************'.format(video_index, frame_index))
                                         break
                         # cv2.imshow('frame', frame)
                         if cv2.waitKey(1) & 0xff == 27:
