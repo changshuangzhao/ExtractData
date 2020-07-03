@@ -18,7 +18,7 @@ def parms():
     parser.add_argument('--save_dir', type=str, default='tmp/',
                         help='Directory for detect result')
     parser.add_argument('--breath_modelpath', type=str,
-                        default='../networks/rbcar_mafa_best.pth', help='trained model')
+                        default='../networks/99.55rbcar_mafa_best.pth', help='trained model')
     parser.add_argument('--threshold', default=0.65, type=float,
                         help='Final confidence threshold')
     parser.add_argument('--use_cuda', default=False, type=bool,
@@ -38,12 +38,11 @@ if __name__ == '__main__':
 
     # root = '/media/changshuang/My Book/ShangYu_videos/short video'
     # path = '/media/changshuang/My Book/ShangYu_Extract_Save'
-    # root = '/Users/yanyan/Desktop/ShangYu_videos/short video'
-    # path = '/Users/yanyan/Desktop/data'
-    root = '/Users/yanyan/Desktop/ShangYu_videos/long video'
+    root = '/Users/yanyan/Desktop/ShangYu_videos/short video 1'
+    # root = '/Users/yanyan/Desktop/ShangYu_videos/long video'
     path = '/Users/yanyan/Desktop/zhatuche_test_save'
 
-    video_anno = os.path.join(os.path.dirname(__file__), '../../video/ShangYu_long_video_path.txt')
+    video_anno = os.path.join(os.path.dirname(__file__), '../../video/ShangYu_short_video_1_path.txt')
     with open(video_anno, 'r') as f:
         video_annos = f.readlines()
         for video_index in range(len(video_annos)):
@@ -66,7 +65,7 @@ if __name__ == '__main__':
                     if ret:
                         if frame_index % 100 == 0:
                             print('##############cur frame index value ({})##############'.format(frame_index))
-                        if frame_index % 15 == 0:
+                        if frame_index % 1 == 0:
                             data_dict = detection_by_image(frame)
                             datas = data_dict['data']
                             if datas:

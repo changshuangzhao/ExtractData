@@ -1,11 +1,12 @@
 # -*-coding:utf-8-*-
 import os
 # root = '/media/changshuang/My Book/ShangYu_videos/short video'
-root = '/Users/yanyan/Desktop/ShangYu_videos/long video'
-# root = '/Users/yanyan/Desktop/zhatuche_test_video'
+# root = '/Users/yanyan/Desktop/ShangYu_videos/long video'
+root = '/Users/yanyan/Desktop/ShangYu_videos/short video 1'
 
 video_names = sorted(os.listdir(root))
-print(len(video_names))
-with open('ShangYu_long_video_path.txt', 'w') as f:
+with open('ShangYu_short_video_1_path.txt', 'w') as f:
     for i in range(len(video_names)):
-        f.writelines(str(video_names[i]) + '\n')
+        if '.DS_Store' in video_names[i]:
+            continue
+        f.writelines(video_names[i] + '\n')
