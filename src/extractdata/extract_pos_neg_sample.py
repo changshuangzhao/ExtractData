@@ -40,10 +40,10 @@ if __name__ == '__main__':
     # path = '/media/changshuang/My Book/ShangYu_Extract_Save'
     # root = '/Users/yanyan/Desktop/ShangYu_videos/short video'
     # path = '/Users/yanyan/Desktop/data'
-    root = '/Users/yanyan/Desktop/zhatuche_test_video'
+    root = '/Users/yanyan/Desktop/ShangYu_videos/long video'
     path = '/Users/yanyan/Desktop/zhatuche_test_save'
 
-    video_anno = os.path.join(os.path.dirname(__file__), '../../video/zhatuche_test_video_path.txt')
+    video_anno = os.path.join(os.path.dirname(__file__), '../../video/ShangYu_long_video_path.txt')
     with open(video_anno, 'r') as f:
         video_annos = f.readlines()
         for video_index in range(len(video_annos)):
